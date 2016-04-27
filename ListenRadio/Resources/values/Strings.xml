@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Play">Play radio</string>
+  <string name="Stop">Stop radio</string>
+  <string name="Pause">Pause radio</string>
+  <string name="ApplicationName">ListenRadio</string>
+</resources>
