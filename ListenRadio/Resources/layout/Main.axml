@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout1">
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/LogoImageView" />
+    <TextView
+        android:text="Title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LogoImageView"
+        android:id="@+id/TitleTextView"
+        android:lines="1" />
+    <TextView
+        android:text="info"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitleTextView"
+        android:id="@+id/InfoTextView" />
     <Button
         android:id="@+id/PlayButton"
+        android:layout_below="@id/InfoTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Play" />
@@ -13,5 +34,6 @@
         android:id="@+id/StopButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Stop" />
-</LinearLayout>
+        android:text="@string/Stop"
+        android:layout_below="@id/PlayButton" />
+</RelativeLayout>

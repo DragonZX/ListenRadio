@@ -60,11 +60,20 @@ namespace ListenRadio
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050003
+			public const int InfoTextView = 2131034115;
+			
 			// aapt resource value: 0x7f050001
-			public const int PlayButton = 2131034113;
+			public const int LogoImageView = 2131034113;
+			
+			// aapt resource value: 0x7f050004
+			public const int PlayButton = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int StopButton = 2131034117;
 			
 			// aapt resource value: 0x7f050002
-			public const int StopButton = 2131034114;
+			public const int TitleTextView = 2131034114;
 			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
@@ -106,6 +115,9 @@ namespace ListenRadio
 			
 			// aapt resource value: 0x7f040000
 			public const int Play = 2130968576;
+			
+			// aapt resource value: 0x7f040004
+			public const int RadioUrl = 2130968580;
 			
 			// aapt resource value: 0x7f040001
 			public const int Stop = 2130968577;
