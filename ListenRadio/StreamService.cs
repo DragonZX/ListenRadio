@@ -23,7 +23,7 @@ namespace ListenRadio
         public const string ActionPause = "com.action.PAUSE";
         public const string ActionStop = "com.action.STOP";
 
-        private const string _radio = @"http://5.9.135.213:8000/play";
+        private string _radio;
 
         private MediaPlayer player;
         private AudioManager audioManager;
@@ -38,6 +38,7 @@ namespace ListenRadio
             base.OnCreate();
             audioManager = (AudioManager)GetSystemService(AudioService);
             wifiManager = (WifiManager)GetSystemService(WifiService);
+            _radio = GetString(Resource.String.RadioUrl);
         }
 
         public override IBinder OnBind(Intent intent)
@@ -121,22 +122,28 @@ namespace ListenRadio
 
         private void StartForeground()
         {
-
+            //Intent for showing notification
             var pendingIntent = PendingIntent.GetActivity(ApplicationContext, 0,
                             new Intent(ApplicationContext, typeof(MainActivity)),
                             PendingIntentFlags.UpdateCurrent);
 
-            var notification = new Notification
-            {
-                TickerText = new Java.Lang.String("Stream started!"),
-                Icon = Resource.Drawable.Icon
-            };
-            notification.Flags |= NotificationFlags.OngoingEvent;
-            notification.SetLatestEventInfo(ApplicationContext, "Listen Radio",
-                            "Music streaming", pendingIntent);
-            StartForeground(NotificationId, notification);
+            //Custom notification and build it
+            var builder = new Notification.Builder(this)
+            .SetContentText("Radio is playing")
+            .SetContentTitle("Listen Radio")
+            .SetContentIntent(pendingIntent)
+            .SetSmallIcon(Resource.Drawable.Icon)
+            .SetOngoing(true);
+            Notification notification = builder.Build();
+
+            //Init notification manager and show notification
+            NotificationManager notificationManager =
+                GetSystemService(Context.NotificationService) as NotificationManager;
+            notificationManager.Notify(NotificationId, notification);
+
         }
 
+        //Pause, can use it if you want
         private void Pause()
         {
             if (player == null)
@@ -149,6 +156,7 @@ namespace ListenRadio
             paused = true;
         }
 
+        //Stop
         private void Stop()
         {
             if (player == null)
@@ -163,7 +171,7 @@ namespace ListenRadio
             ReleaseWifiLock();
         }
 
-
+        //Wifi lockers, when device go to sleep still play streaming
         private void AquireWifiLock()
         {
             if (wifiLock == null)
@@ -193,6 +201,10 @@ namespace ListenRadio
         }
 
 
+        /// <summary>
+        /// Focus change, when user change application
+        /// </summary>
+        /// <param name="focusChange">Check app audio focus</param>
         public void OnAudioFocusChange(AudioFocus focusChange)
         {
             switch (focusChange)
